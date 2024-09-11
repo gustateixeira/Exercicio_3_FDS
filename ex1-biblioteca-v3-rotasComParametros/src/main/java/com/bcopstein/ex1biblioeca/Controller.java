@@ -52,6 +52,15 @@ public class Controller {
                 .toList();
     }
 
+    @GetMapping("livrosporano")// livrosporano?ano=2020
+    @CrossOrigin(origins = "*")
+    public List<Livro> getLivrosPorAno(@RequestParam(value ="ano") int ano){
+        return livros.stream()
+                     .filter(livro -> livro.getAno() == ano)
+                     .toList();
+    }
+
+
     @GetMapping("/livrosautor/{autor}/ano/{ano}") //livrosautor/Huguinho Pato/ano/2023
     @CrossOrigin(origins = "*")
     public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
@@ -61,10 +70,20 @@ public class Controller {
                 .toList();
     }
 
+    @GetMapping("desatualizados/{ano}")
+    @CrossOrigin(origins="*")
+    public List<Livro> getLivrosAntesDoAno(@PathVariable(value="ano")int ano){
+        return livros.stream()
+                     .filter(livro->livro.getAno() < ano)
+                     .toList();
+    }
+
+
     @PostMapping("/novolivro")
     @CrossOrigin(origins = "*")
     public boolean cadastraLivroNovo(@RequestBody final Livro livro) {
         livros.add(livro);
         return true;
     }
+
 }
