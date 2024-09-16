@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
-    private Acervo ACERVO;
+    private IAcervoRepository ACERVO;
 
-    @Autowired
-    public Controller(Acervo acervo) {
+    public Controller(IAcervoRepository acervo) {
        this.ACERVO = acervo;
     }
 

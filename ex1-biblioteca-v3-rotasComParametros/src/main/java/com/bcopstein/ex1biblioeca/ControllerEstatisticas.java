@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ControllerEstatisticas {
-    private Acervo ACERVO;
+    private IAcervoRepository ACERVO;
 
-    public ControllerEstatisticas(Acervo acervo) {
+    public ControllerEstatisticas(IAcervoRepository acervo) {
        this.ACERVO = acervo;
     }
 

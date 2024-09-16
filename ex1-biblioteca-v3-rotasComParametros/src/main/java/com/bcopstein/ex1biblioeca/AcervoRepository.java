@@ -2,17 +2,17 @@ package com.bcopstein.ex1biblioeca;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Component
-public class Acervo {
+@Repository
+public class AcervoRepository implements IAcervoRepository {
     private List<Livro> livros;
 
     
-    public Acervo(List<Livro> livros) {
+    public AcervoRepository() {
         this.livros = new LinkedList<>();
         livros.add(new Livro(100, "Aprendendo Spring-Boot", "Huguinho Pato", 2020));
         livros.add(new Livro(120, "Aprendendo Java", "Zezinho Pato", 2015));
