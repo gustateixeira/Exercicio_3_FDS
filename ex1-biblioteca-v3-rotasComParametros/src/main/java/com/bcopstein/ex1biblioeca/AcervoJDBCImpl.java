@@ -64,7 +64,9 @@ public class AcervoJDBCImpl implements IAcervoRepository {
     }   
 
     public int getTotalDeLivrosDoAutor(@PathVariable(value="autor") String autor) {
-        return 0;}
+        var resp = this.jdbcTemplate.query("SELECT COUNT(*) from livros WHERE autor ='"+autor+"'", (rs, rowNum) -> rs.getInt("Numero de Livros"));
+        return resp.get(0);
+    }
 
     public int getTotalDeLivrosDoAutorApartirDeAno(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
         return -1;
