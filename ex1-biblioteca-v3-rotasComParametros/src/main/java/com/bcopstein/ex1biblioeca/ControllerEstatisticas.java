@@ -13,13 +13,13 @@ public class ControllerEstatisticas {
        this.ACERVO = acervo;
     }
 
-    @GetMapping("totalivros")
+    @GetMapping("totalivros/{autor}")
     @CrossOrigin(origins = "*")
     public int getTotalDeLivrosDoAutor(@PathVariable(value="autor") String autor) {
         return ACERVO.getTotalDeLivrosDoAutor(autor);
     }
 
-    @GetMapping("totalivros/ano")
+    @GetMapping("totalivros/{autor}/ano/{ano}")
     @CrossOrigin(origins = "*")
     public int getLivrosDoAutor(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
         return ACERVO.getTotalDeLivrosDoAutorApartirDeAno(autor, ano);

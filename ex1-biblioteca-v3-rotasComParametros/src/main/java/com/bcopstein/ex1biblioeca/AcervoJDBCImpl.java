@@ -42,8 +42,7 @@ public class AcervoJDBCImpl implements IAcervoRepository {
         return resp;
     }
 
-    public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
-        
+    public List<Livro> getLivrosDoAutorDoAno(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
         List<Livro> resp = this.jdbcTemplate.query("SELECT * from livros WHERE autor ='"+autor+"' and ano ='"+ano+"'",
          (rs,rowNum) -> new Livro(rs.getInt("codigo"),
           rs.getString("titulo"),
@@ -64,17 +63,19 @@ public class AcervoJDBCImpl implements IAcervoRepository {
     }   
 
     public int getTotalDeLivrosDoAutor(@PathVariable(value="autor") String autor) {
-        var resp = this.jdbcTemplate.query("SELECT COUNT(*) from livros WHERE autor ='"+autor+"'", (rs, rowNum) -> rs.getInt("Numero de Livros"));
-        return resp.get(0);
+        List<Integer> resp = this.jdbcTemplate.query("SELECT COUNT(*) AS count from livros WHERE autor ='"+autor+"'",
+        (rs,rowNum) -> rs.getInt("count"));
+       return resp.get(0);
     }
 
     public int getTotalDeLivrosDoAutorApartirDeAno(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
-        return -1;
+        List<Integer> resp = this.jdbcTemplate.query("SELECT COUNT(*) AS count from livros WHERE autor ='"+autor+"' and ano >='"+ano+"'",
+        (rs,rowNum) -> rs.getInt("count"));
+       return resp.get(0);
     }
 
     public double getMediaDeLivrosPorAutor() {
-        int totalLivros = getListaLivros().size();
-        int totalAutores = getListaAutores().size();
-        return totalLivros / totalAutores;
-    }
+        List<Double> r1 = this.jdbcTemplate.query("SELECT COUNT(DISTINCT livros.autor) / count(DISTINCT livros.codigo) AS media FROM livros", (rs, rowNum) -> rs.getDouble("media"));
+        return r1.get(0);
+    }   
 }
