@@ -43,8 +43,8 @@ public class Controller {
 
     @GetMapping("/livrosautor/{autor}/ano/{ano}") //livrosautor/Huguinho Pato/ano/2023
     @CrossOrigin(origins = "*")
-    public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
-        return ACERVO.getLivrosDoAutor(autor, ano);
+    public List<Livro> getLivrosDoAutorDoAno(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
+        return ACERVO.getLivrosDoAutorDoAno(autor, ano);
     }
 
     @PostMapping("/novolivro")
@@ -52,4 +52,19 @@ public class Controller {
     public boolean cadastraLivroNovo(@RequestBody final Livro livro) {
         return ACERVO.cadastraLivroNovo(livro);
     }
+
+    @GetMapping("emprestimos")
+    @CrossOrigin(origins = "*")
+    public boolean emprestaLivro(@PathVariable(value="titulo") String titulo, @PathVariable(value="autor") String autor) {
+        //TODO
+        return true;
+    }
+
+    @GetMapping("emprestimos")
+    @CrossOrigin(origins = "*")
+    public boolean devolveLivro(@PathVariable(value="titulo") String titulo, @PathVariable(value="autor") String autor) {
+        //TODO
+        return true;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.bcopstein.ex1biblioeca;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -77,5 +78,27 @@ public class AcervoJDBCImpl implements IAcervoRepository {
     public double getMediaDeLivrosPorAutor() {
         List<Double> r1 = this.jdbcTemplate.query("SELECT COUNT(DISTINCT livros.autor) / count(DISTINCT livros.codigo) AS media FROM livros", (rs, rowNum) -> rs.getDouble("media"));
         return r1.get(0);
+    }   
+    
+    public boolean emprestaLivro(@RequestBody Livro livro, String userId) {
+        var resp = this.jdbcTemplate.query("SELECT * from livros WHERE codigo ='"+livro.getId()+"'",
+        (rs,rowNum) -> rs.getInt("codigo"));
+        if(!resp.isEmpty()){
+            String query = "UPDATE livros SET status = ? WHERE codigo = ?";
+            this.jdbcTemplate.update(query, userId, livro.getId());
+            return true;
+        }
+        return false;
+    }   
+
+    public boolean devolveLivro(@RequestBody final Livro livro, String userId) {
+        var resp = this.jdbcTemplate.query("SELECT * from livros WHERE codigo ='"+livro.getId()+"'",
+        (rs,rowNum) -> rs.getInt("codigo"));
+        if(!resp.isEmpty()){
+            String query = "UPDATE livros SET status = ? WHERE codigo = ?";
+            this.jdbcTemplate.update(query, userId, livro.getId());
+            return true;
+        }
+        return false;
     }   
 }

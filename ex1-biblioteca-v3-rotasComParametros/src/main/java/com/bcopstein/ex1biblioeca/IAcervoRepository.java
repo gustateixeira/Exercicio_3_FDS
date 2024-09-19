@@ -12,7 +12,7 @@ public interface IAcervoRepository {
 
     public List<Livro> getLivrosDoAutor(@RequestParam(value = "autor") String autor);
 
-    public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano);
+    public List<Livro> getLivrosDoAutorDoAno(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano);
 
     public boolean cadastraLivroNovo(@RequestBody final Livro livro);
 
