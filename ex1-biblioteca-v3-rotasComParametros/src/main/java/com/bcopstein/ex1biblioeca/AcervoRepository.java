@@ -37,7 +37,7 @@ public class AcervoRepository implements IAcervoRepository {
                 .toList();
     }
 
-    public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
+    public List<Livro> getLivrosDoAutorDoAno(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
         return livros.stream()
                 .filter(livro -> livro.getAutor().equals(autor))
                 .filter(livro -> livro.getAno() == ano)

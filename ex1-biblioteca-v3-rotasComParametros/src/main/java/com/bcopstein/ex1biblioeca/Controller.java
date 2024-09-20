@@ -44,7 +44,7 @@ public class Controller {
     @GetMapping("/livrosautor/{autor}/ano/{ano}") //livrosautor/Huguinho Pato/ano/2023
     @CrossOrigin(origins = "*")
     public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
-        return ACERVO.getLivrosDoAutor(autor, ano);
+        return ACERVO.getLivrosDoAutorDoAno(autor, ano);
     }
 
     @PostMapping("/novolivro")
