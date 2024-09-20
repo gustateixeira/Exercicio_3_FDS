@@ -80,23 +80,23 @@ public class AcervoJDBCImpl implements IAcervoRepository {
         return r1.get(0);
     }   
     
-    public boolean emprestaLivro(@RequestBody Livro livro, String userId) {
+    public boolean emprestaLivro(@RequestBody Livro livro, final Usuario user) {
         var resp = this.jdbcTemplate.query("SELECT * from livros WHERE codigo ='"+livro.getId()+"'",
         (rs,rowNum) -> rs.getInt("codigo"));
         if(!resp.isEmpty()){
-            String query = "UPDATE livros SET status = ? WHERE codigo = ?";
-            this.jdbcTemplate.update(query, userId, livro.getId());
+            String query = "UPDATE livros SET status = (?) WHERE codigo = (?)";
+            this.jdbcTemplate.update(query, user.getCodigo(), livro.getId());
             return true;
         }
         return false;
     }   
 
-    public boolean devolveLivro(@RequestBody final Livro livro, String userId) {
+    public boolean devolveLivro(@RequestBody final Livro livro, final Usuario user) {
         var resp = this.jdbcTemplate.query("SELECT * from livros WHERE codigo ='"+livro.getId()+"'",
         (rs,rowNum) -> rs.getInt("codigo"));
         if(!resp.isEmpty()){
             String query = "UPDATE livros SET status = ? WHERE codigo = ?";
-            this.jdbcTemplate.update(query, userId, livro.getId());
+            this.jdbcTemplate.update(query, user.getCodigo(), livro.getId());
             return true;
         }
         return false;
