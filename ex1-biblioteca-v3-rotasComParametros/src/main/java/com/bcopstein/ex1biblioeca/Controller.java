@@ -53,14 +53,13 @@ public class Controller {
         return ACERVO.cadastraLivroNovo(livro);
     }
 
-    @GetMapping("emprestimos")
+    @GetMapping("emprestimos/id")
     @CrossOrigin(origins = "*")
-    public boolean emprestaLivro(@PathVariable(value="titulo") String titulo, @PathVariable(value="autor") String autor) {
-        //TODO
-        return true;
+    public boolean emprestaLivro(@PathVariable(value="codigoLivro") int codigoLivro, @PathVariable(value="userId") int userId) {
+        return ACERVO.emprestaLivro(codigoLivro, userId);
     }
 
-    @GetMapping("emprestimos")
+    @GetMapping("devolve")
     @CrossOrigin(origins = "*")
     public boolean devolveLivro(@PathVariable(value="titulo") String titulo, @PathVariable(value="autor") String autor) {
         //TODO

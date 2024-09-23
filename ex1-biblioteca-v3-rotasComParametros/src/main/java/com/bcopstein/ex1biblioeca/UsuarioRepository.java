@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Repository
 public class UsuarioRepository implements IUsuarioRepository{
-    private List<Usuario> Usuarios;
+    private List<Usuario> usuarios;
 
 
 
     public UsuarioRepository() {
-        this.Usuarios = new LinkedList<>();
+        this.usuarios = new LinkedList<>();
         usuarios.add(new Usuario(2, "Gabriel", 2003, -1));
         usuarios.add(new Usuario(3, "João Pedro", 2005, -1));
         usuarios.add(new Usuario(4, "Bernardo Fio", 2001, -1));

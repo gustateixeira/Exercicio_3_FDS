@@ -67,4 +67,10 @@ public class AcervoRepository implements IAcervoRepository {
         int totalAutores = getListaAutores().size();
         return totalLivros / totalAutores;
     }
+
+    @Override
+    public boolean emprestaLivro(int codigoLivro, int userId) {
+        // TODO Auto-generated method stub
+        return true;
+    }
 }
