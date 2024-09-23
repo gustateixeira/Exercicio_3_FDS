@@ -65,4 +65,14 @@ public class Controller {
         return ACERVO.devolveLivro(codigoLivro);
     }
 
+    @GetMapping("livros/livres")
+    @CrossOrigin(origins="*")
+    public List<Livro> listarLivrosLivres(){
+        return ACERVO.listarLivrosLivres();
+    }
+    @GetMapping("livros/emprestados")
+    @CrossOrigin(origins="*")
+    public List<Livro> listarLivrosEmprestados(){
+        return ACERVO.listarLivrosEmprestados();
+    }
 }

@@ -25,4 +25,8 @@ public interface IAcervoRepository {
     public boolean emprestaLivro(int codigoLivro, int userId);
 
     public boolean devolveLivro(int codigoLivro);
+
+    public List<Livro> listarLivrosLivres();
+
+    public List<Livro> listarLivrosEmprestados();
 }

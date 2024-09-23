@@ -2,7 +2,6 @@ package com.bcopstein.ex1biblioeca;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -101,4 +100,21 @@ public class AcervoJDBCImpl implements IAcervoRepository {
         }
         return false;
     }   
+
+    public List<Livro> listarLivrosLivres(){
+        List<Livro> resp = this.jdbcTemplate.query("SELECT * from livros WHERE cod_emprestimo = -1",
+        (rs,rowNum) -> new Livro(rs.getInt("codigo"),
+                                 rs.getString("titulo"),
+                                 rs.getString("autor"),
+                                 rs.getInt("ano")));
+        return resp;
+    }
+    public List<Livro> listarLivrosEmprestados(){
+        List<Livro> resp = this.jdbcTemplate.query("SELECT * from livros WHERE cod_emprestimo != -1",
+        (rs,rowNum) -> new Livro(rs.getInt("codigo"),
+                                 rs.getString("titulo"),
+                                 rs.getString("autor"),
+                                 rs.getInt("ano")));
+        return resp;
+    }
 }
