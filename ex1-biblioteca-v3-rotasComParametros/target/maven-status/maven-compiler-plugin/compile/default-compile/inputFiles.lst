@@ -1,3 +1,7 @@
 /workspaces/Exercicio_2_FDS/ex1-biblioteca-v3-rotasComParametros/src/main/java/com/bcopstein/ex1biblioeca/Ex1BiblioecaApplication.java
+/workspaces/Exercicio_2_FDS/ex1-biblioteca-v3-rotasComParametros/src/main/java/com/bcopstein/ex1biblioeca/AcervoJDBCImpl.java
+/workspaces/Exercicio_2_FDS/ex1-biblioteca-v3-rotasComParametros/src/main/java/com/bcopstein/ex1biblioeca/Usuario.java
+/workspaces/Exercicio_2_FDS/ex1-biblioteca-v3-rotasComParametros/src/main/java/com/bcopstein/ex1biblioeca/ControllerEstatisticas.java
 /workspaces/Exercicio_2_FDS/ex1-biblioteca-v3-rotasComParametros/src/main/java/com/bcopstein/ex1biblioeca/Livro.java
+/workspaces/Exercicio_2_FDS/ex1-biblioteca-v3-rotasComParametros/src/main/java/com/bcopstein/ex1biblioeca/IAcervoRepository.java
 /workspaces/Exercicio_2_FDS/ex1-biblioteca-v3-rotasComParametros/src/main/java/com/bcopstein/ex1biblioeca/Controller.java
