@@ -23,4 +23,6 @@ public interface IAcervoRepository {
     public double getMediaDeLivrosPorAutor();
 
     public boolean emprestaLivro(int codigoLivro, int userId);
+
+    public boolean devolveLivro(int codigoLivro);
 }

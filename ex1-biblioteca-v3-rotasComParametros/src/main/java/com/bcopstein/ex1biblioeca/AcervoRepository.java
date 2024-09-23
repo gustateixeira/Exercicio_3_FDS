@@ -73,4 +73,10 @@ public class AcervoRepository implements IAcervoRepository {
         // TODO Auto-generated method stub
         return true;
     }
+
+    @Override
+    public boolean devolveLivro(int codigoLivro) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'devolveLivro'");
+    }
 }
