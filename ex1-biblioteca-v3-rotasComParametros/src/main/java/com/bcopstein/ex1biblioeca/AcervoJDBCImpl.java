@@ -2,7 +2,6 @@ package com.bcopstein.ex1biblioeca;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -80,25 +79,42 @@ public class AcervoJDBCImpl implements IAcervoRepository {
         return r1.get(0);
     }   
     
-    public boolean emprestaLivro(@RequestBody Livro livro, final Usuario user) {
-        var resp = this.jdbcTemplate.query("SELECT * from livros WHERE codigo ='"+livro.getId()+"'",
+    public boolean emprestaLivro(int codigoLivro, int userId) {
+        var resp = this.jdbcTemplate.query("SELECT * from livros WHERE codigo ='"+codigoLivro+"' and livros.cod_emprestimo = -1",
         (rs,rowNum) -> rs.getInt("codigo"));
         if(!resp.isEmpty()){
-            String query = "UPDATE livros SET status = (?) WHERE codigo = (?)";
-            this.jdbcTemplate.update(query, user.getCodigo(), livro.getId());
+            String query = "UPDATE livros SET cod_emprestimo = (?) WHERE codigo = (?)";
+            this.jdbcTemplate.update(query, userId, codigoLivro);
             return true;
         }
         return false;
     }   
 
-    public boolean devolveLivro(@RequestBody final Livro livro, final Usuario user) {
-        var resp = this.jdbcTemplate.query("SELECT * from livros WHERE codigo ='"+livro.getId()+"'",
+    public boolean devolveLivro(int codigoLivro) {
+        var resp = this.jdbcTemplate.query("SELECT * from livros WHERE codigo ='"+codigoLivro+"'and livros.cod_emprestimo != -1",
         (rs,rowNum) -> rs.getInt("codigo"));
         if(!resp.isEmpty()){
-            String query = "UPDATE livros SET status = ? WHERE codigo = ?";
-            this.jdbcTemplate.update(query, user.getCodigo(), livro.getId());
+            String query = "UPDATE livros SET cod_emprestimo = ? WHERE codigo = ?";
+            this.jdbcTemplate.update(query, -1, codigoLivro);
             return true;
         }
         return false;
     }   
+
+    public List<Livro> listarLivrosLivres(){
+        List<Livro> resp = this.jdbcTemplate.query("SELECT * from livros WHERE cod_emprestimo = -1",
+        (rs,rowNum) -> new Livro(rs.getInt("codigo"),
+                                 rs.getString("titulo"),
+                                 rs.getString("autor"),
+                                 rs.getInt("ano")));
+        return resp;
+    }
+    public List<Livro> listarLivrosEmprestados(){
+        List<Livro> resp = this.jdbcTemplate.query("SELECT * from livros WHERE cod_emprestimo != -1",
+        (rs,rowNum) -> new Livro(rs.getInt("codigo"),
+                                 rs.getString("titulo"),
+                                 rs.getString("autor"),
+                                 rs.getInt("ano")));
+        return resp;
+    }
 }

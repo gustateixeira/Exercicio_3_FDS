@@ -55,16 +55,24 @@ public class Controller {
 
     @GetMapping("emprestimos")
     @CrossOrigin(origins = "*")
-    public boolean emprestaLivro(@PathVariable(value="titulo") String titulo, @PathVariable(value="autor") String autor) {
-        //TODO
-        return true;
+    public boolean emprestaLivro(@RequestParam(value="codigoLivro") int codigoLivro, @RequestParam(value="userId") int userId) {
+        return ACERVO.emprestaLivro(codigoLivro, userId);
     }
 
-    @GetMapping("emprestimos")
+    @GetMapping("devolve")
     @CrossOrigin(origins = "*")
-    public boolean devolveLivro(@PathVariable(value="titulo") String titulo, @PathVariable(value="autor") String autor) {
-        //TODO
-        return true;
+    public boolean devolveLivro(@RequestParam (value="codigoLivro") int codigoLivro) {
+        return ACERVO.devolveLivro(codigoLivro);
     }
 
+    @GetMapping("livros/livres")
+    @CrossOrigin(origins="*")
+    public List<Livro> listarLivrosLivres(){
+        return ACERVO.listarLivrosLivres();
+    }
+    @GetMapping("livros/emprestados")
+    @CrossOrigin(origins="*")
+    public List<Livro> listarLivrosEmprestados(){
+        return ACERVO.listarLivrosEmprestados();
+    }
 }

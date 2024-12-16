@@ -1,7 +1,5 @@
 com/bcopstein/ex1biblioeca/IAcervoRepository.class
 com/bcopstein/ex1biblioeca/AcervoJDBCImpl.class
-com/bcopstein/ex1biblioeca/AcervoRepository.class
 com/bcopstein/ex1biblioeca/Livro.class
-com/bcopstein/ex1biblioeca/Ex1BiblioecaApplication.class
 com/bcopstein/ex1biblioeca/ControllerEstatisticas.class
 com/bcopstein/ex1biblioeca/Controller.class
